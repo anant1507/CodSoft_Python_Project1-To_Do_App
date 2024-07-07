@@ -1,0 +1,15 @@
+a {
+  text-decoration: none;
+}
+body {
+  background-color:rgb(235, 135, 4);
+}
+.form{
+  margin:2rem auto;
+}
+.btn{
+  margin:2.3rem 2rem;
+  padding:15px;
+  background-color: rgb(20, 73, 220);
+
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App</title>
+  <link rel="stylesheet" href="./styles.css">
+<style>
+  * {
+  box-sizing: border-box;
+  overflow-y:hidden;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230415/pngtree-website-technology-line-dark-background-image_2344719.jpg');
+  /* https://img.freepik.com/free-photo/abstract-digital-grid-black-background_53876-97647.jpg' */
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  /* display: flex;
+      justify-content: center;
+      align-items: center; */
+  height: 100vh;
+}
+
+/* #auth{
+      max-width:40vw;
+      max-height:50vh;
+    } */
+.container {
+  /* display:flex;
+      justify-content: center;
+      align-items:center; */
+  /* min-width:50vw; */
+  transform: translateY(30%);
+  max-width: 22rem;
+  margin: 50px auto;
+  color: white;
+  background-color: hsla(0, 5%, 0%, 0.6);
+  padding: 30px;
+  border-radius: 17px;
+  box-shadow: 12px 15px 16px rgba(192, 78, 78, 0.2);
+}
+
+.form-group {
+  margin-bottom: 15px;
+
+}
+
+.form-group input {
+  width: 90%;
+  padding: 12px;
+  outline: none;
+  border: none;
+  background-color: #F7F9F2;
+  border-radius: 3px;
+  margin-top: 12px;
+
+}
+
+.inputfield.active {
+  border: 3px solid #BBE9FF;
+}
+
+#auth button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 5px auto;
+}
+
+#auth button:hover {
+  background-color: #0056b3;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.task-table th,
+.task-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.task-table th {
+  background-color: #f2f2f2;
+}
+
+.task-table td button {
+  background-color: red;
+  border: none;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.task-table td button.update {
+  background-color: #007bff;
+}
+
+.task-table td button:hover {
+  background-color: darkred;
+}
+
+.task-table td button.update:hover {
+  background-color: #0056b3;
+}
+
+.usernamefield {
+  margin-bottom: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bolder;
+  font-size: larger;
+}
+
+header {
+  background-color: #5A639C;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  max-height: 6vh;
+  padding: 20px;
+  gap: 15vw;
+  color: black;
+}
+
+.title-wrapper {
+  transform: translate(-15%);
+}
+
+.link-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  gap: 10vw;
+}
+.button-wrapper {
+
+  transform: translateY(14%);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+</style>
+</head>
+
+<body>
+  <header>
+    
+      <div class="title-wrapper">
+        <h2>Todo App</h2>
+      </div>
+      <div class="link-wrapper">
+      <a href="{{ url_for('logs')}}">Login</a>
+      <a href="{{ url_for('sign')}}">Signup</a>
+    </div>
+    
+  </header>
+  <script>
+    const apiUrl = 'http://127.0.0.1:5000';
+    const inputFields = document.getElementsByClassName('inputfield');
+      for (let inputField of inputFields) {
+        inputField.addEventListener('click', () => {
+          inputField.classList.toggle('active');
+        });
+      }
+   
+  </script>
+</body>
+
+</html>

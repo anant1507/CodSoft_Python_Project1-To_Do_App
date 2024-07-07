@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App</title>
+  <link rel="stylesheet" href="./styles.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230415/pngtree-website-technology-line-dark-background-image_2344719.jpg');
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+    .container {
+      transform: translateY(30%);
+      max-width: 22rem;
+      margin: 50px auto;
+      color: white;
+      background-color: hsla(0, 5%, 0%, 0.6);
+      padding: 30px;
+      border-radius: 17px;
+      box-shadow: 12px 8px 16px rgba(192, 78, 78, 0.2);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+
+    }
+    .form-group input {
+      width: 90%;
+      padding: 12px;
+      outline: none;
+      border: none;
+      background-color: #F7F9F2;
+      border-radius: 3px;
+      margin-top: 12px;
+    }
+    .inputfield.active {
+      border: 3px solid #BBE9FF;
+    }
+    #auth button {
+      padding: 10px 15px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+      margin: 5px auto;
+    }
+    #auth button:hover {
+      background-color: #0056b3;
+    }
+    .task-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .task-table th,
+    .task-table td {
+      padding:8px;
+      border: 1.5px solid black;
+      text-align:center;
+    }
+
+    .task-table th {
+      background-color: #f2f2f2;
+      color:rgb(217, 0, 255);
+      font-weight:bolder;
+    }
+    .task-table td{
+      background-color: #9B86BD;
+    }
+
+    .task-table .delete,
+    .task-table .update {
+      background-color: red;
+      border: none;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+      padding:8px;
+    }
+
+    .task-table td button.update {
+      background-color: #007bff;
+    }
+
+    .task-table td button:hover {
+      background-color: darkred;
+    }
+
+    .task-table td button.update:hover {
+      background-color: #0056b3;
+    }
+
+    .usernamefield {
+      margin-bottom: 15px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-weight: bolder;
+      font-size: larger;
+    }
+
+    header {
+      background-color: #5A639C;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+      align-items: center;
+      max-height: 7vh;
+      padding: 20px;
+      gap: 15vw;
+      color: black;
+    }
+
+    .title-wrapper {
+      transform: translate(-15%);
+      color:white;
+      font-size:20px;
+    }
+
+    .link-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: row;
+      align-items: center;
+      color: white;
+      gap: 10vw;
+    }
+
+    .button-wrapper {
+
+      transform: translateY(14%);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .message-wrapper{
+      color:red;
+      font-size:14px;
+      text-align: center;
+    }
+    .btn{
+      padding: 10px 15px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+      margin: 5px auto;
+      
+    }
+    .btn-wrapper{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .activity{
+      color:black;
+      background-color:#F7F9F2;
+    }
+    #todo-appcontainer{
+      position:relative;
+      left:35px;
+      top:45px;
+      color: white;
+      background-color: hsla(0, 5%, 0%, 0.6);
+      box-shadow:  10px 10px 16px rgba(181, 63, 63,0.5);
+      
+      max-width: 22rem;
+      border-radius: 17px;
+      padding: 30px;
+    }
+    .todomessage-wrapper{
+      color:greenyellow;
+      font-size:14px;
+      text-align: center;
+    }
+    .task-table{
+      background-color:#9B86BD;
+      width:auto;
+      max-width: 50vw;
+      border-collapse: collapse;
+      margin-top: 20px;
+      transform:translate(14rem,5rem);
+      position:relative;
+      top:-280px;
+      left:330px;
+      box-shadow:  12px 12px 16px rgba(44, 117, 127, 1);
+      table-layout:fixed;
+    }
+    .input{
+      background-color: transparent;
+      border: none;
+      outline: none;
+      color:white;
+    }
+    .task-table .editbutton{
+      border: none;
+      color:black;
+      border-radius: 3px;
+      cursor: pointer;
+      padding:8px;
+      background-color: greenyellow;
+    }
+    .task-table .editbutton:hover{
+      background-color: green;
+    }
+    #minutes{
+      max-width:18px;
+    }
+    .complete{
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      padding:8px;
+      color:white;
+    }
+    .title-wrapper h2{
+      word-spacing: 7px;
+    }
+    #name-wrapper{
+      color:red;
+      font-size:14px;
+      text-align: center;
+      margin-bottom:20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+
+    <div class="title-wrapper">
+      <h2>Todo App - LogIn Page </h2>
+    </div>
+  </header>
+  <div class="container">
+    <div id="auth">
+      <div class="form-group">
+        <label for="username" id="usernamefield">Enter Username</label>
+        <input type="text" id="username" placeholder="Username" class="inputfield" autocomplete="off" value="" name="new-username">
+      </div>
+      <div id="name-wrapper">
+
+      </div>
+      <div class="form-group">
+        <label for="username" id="usernamefield">Enter Password</label>
+        <input type="password" id="password" placeholder="Password" class="inputfield" autocomplete="off" value="" name="new-password">
+      </div>
+        <div class="message-wrapper">
+              
+        </div>
+      <div class="button-wrapper">
+        <button onclick="login()">Login</button>
+      </div>
+    </div>
+    </div>
+    <div id="todo-appcontainer" style="display:none;">
+    <div id="todo-app" style="display:none;">
+      <div class="form-group">
+        <label for="task">Enter new Task:</label>
+        <input type="text" id="task" placeholder="New task">
+        </div>
+        <!-- <button class="btn" onclick="addTask()">Add Task</button> -->
+         <div class="form-group">
+        <label for="duration">Enter Duration</label>
+        <input type="text" id="duration" placeholder="Duration in minutes">
+      </div>
+      <div class="todomessage-wrapper">
+
+      </div>
+      <div class="btn-wrapper">
+      <button class="btn" onclick="addTask()">Add Task</button>
+      </div>
+      </div>
+      </div>
+      
+      <table class="task-table" id="task-table" style="display:none;" >
+        <thead>
+          <tr class="activity">
+            <th>Task</th>
+            <th>Update Task</th>
+            <th>Edit Task</th>
+            <th>Delete Task</th>
+            <th>Duration</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="task-list">
+          <!-- Tasks will be dynamically inserted here -->
+        </tbody>
+      </table>
+      
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+            const usernameInput = document.getElementById('username');
+            const errorSpan = document.getElementById('name-wrapper');
+
+            // Regular expression for username (example: alphanumeric and underscore)
+            const usernameRegex = /^[a-zA-Z0-9_]+$/;
+
+            function validateUsername(username) {
+              return usernameRegex.test(username);
+            }
+
+            usernameInput.addEventListener('input', function () {
+              const username = usernameInput.value.trim();
+
+              if (validateUsername(username)) {
+                errorSpan.textContent = ''; // Clear error message if valid
+              } else {
+                errorSpan.textContent = 'Invalid username format'; // Display error message
+              }
+            });
+          });
+
+    const apiUrl = 'http://127.0.0.1:5000';
+    const inputFields = document.getElementsByClassName('inputfield');
+    for (let inputField of inputFields) {
+      inputField.addEventListener('click', () => {
+        inputField.classList.toggle('active');
+      });
+    }
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      if(password.length <8){
+        const message_wrapper = document.querySelector('.message-wrapper');
+        message_wrapper.style.color = 'red';
+        message_wrapper.innerText = "Password Length Must Be 8 characters";
+        return;
+      }
+
+      fetch(`${apiUrl}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.message==="Login successful") {
+            const message_wrapper = document.querySelector('.message-wrapper');
+            message_wrapper.style.color = 'green';
+            message_wrapper.innerText="Login successful";
+            setTimeout(()=>{
+              document.querySelector('body').style.backgroundImage=`url('https://img.freepik.com/free-photo/abstract-digital-grid-black-background_53876-97647.jpg')`;
+              const title_wrapper=document.querySelector('.title-wrapper');
+              title_wrapper.innerHTML=`TODO LIST OF ${username.toUpperCase()}`;
+
+              title_wrapper.classList.add("title-wrapper");
+              message_wrapper.innerText = "";
+              const container=document.querySelector(".container");
+              container.style.display='none';
+              localStorage.setItem('user_id', data.user_id);
+              document.getElementById('auth').style.display = 'none';
+              document.getElementById('todo-app').style.display = 'block';
+              document.querySelector('#todo-appcontainer').style.display='block';
+              loadTasks();
+            },3000)
+          } 
+          else if (data.message === "User does not exist Try signing Up") {
+            const message_wrapper = document.querySelector('.message-wrapper');
+            message_wrapper.style.color = 'red';
+            message_wrapper.innerText = "User does not exist Try signing Up";
+            setTimeout(()=>{
+              message_wrapper.innerText = "";
+              window.location.href = '/redirect'; 
+            },3000)
+          }
+          else if(data.error="Invalid username or password"){
+            const message_wrapper = document.querySelector('.message-wrapper');
+            message_wrapper.style.color = 'red';
+            message_wrapper.innerText="Invalid username or password, Check again";
+            alert(data.error)
+          }
+        });
+    }
+    function addTask() {
+      const task = document.getElementById('task').value.trim();
+      const duration=document.getElementById('duration').value.trim();
+      if(!task){
+        alert('Task Cannot be Empty');
+        return;
+      }
+      if(!duration){
+        alert('Duration Cannot Be Empty');
+        return;
+      }
+      const user_id = localStorage.getItem('user_id');
+      fetch(`${apiUrl}/tasks`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ task, user_id ,duration})
+      })
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector(".todomessage-wrapper").innerText=`${data.message}`;
+          // after adding task for a specifi user we need to show the tasks added in tabular form
+          loadTasks();
+          document.getElementById('task').value = ''; // Clear input field
+          document.getElementById('duration').value='';
+          document.querySelector(".todomessage-wrapper").innerText ="";
+        });
+    }
+
+    function loadTasks() {
+      const user_id = localStorage.getItem('user_id');
+      fetch(`${apiUrl}/tasks/${user_id}`)
+        .then(response => response.json())
+        .then(data => {
+          const taskList = document.getElementById('task-list');
+          taskList.innerHTML = '';
+          // to get rid of previous user info
+          if(data.length === 0){
+            const tasktable = document.querySelector(".task-table");
+            tasktable.style.display='none';
+            return;
+          }
+          data.forEach(task => {
+            const tasktable=document.querySelector(".task-table");
+            tasktable.style.display='block';
+            const taskRow = document.createElement('tr');
+            taskRow.innerHTML = `
+                        <td><input type="text" value="${task.task.toUpperCase()}" id="task-${task.id}" readonly class="input"></td>
+                        <td>
+                            <button class="update" onclick="editTask('${task.id}')">Edit</button></td>
+                        <td>
+                            <button  onclick="updateTask('${task.id}')" class="editbutton">Update</button></td>
+                        <td>
+                            <button onclick="deleteTask('${task.id}')" class="delete">Delete</button>
+                        </td>
+                        <td><input type="text" value="${task.duration}" id="minutes" readonly class="input"></td>
+                        <td><button onclick="completeTask('${task.id}')" class="complete">${task.completed ? 'Completed' : 'Pending'}</button></td>
+                    `;
+                  taskRow.querySelector('.input').backgroundColor='transparent';
+                  const complete=taskRow.querySelector('.complete');
+                  if(complete.innerText === "Completed"){
+                    complete.style.backgroundColor='green';
+                  }
+                  else{
+                    complete.style.backgroundColor = 'red';
+                  }
+
+            taskList.appendChild(taskRow);
+          });
+        });
+    }
+
+    function editTask(task_id) {
+      const taskInput = document.getElementById(`task-${task_id}`);
+      taskInput.readOnly = false;
+      // so that the input box becomes editable 
+      taskInput.focus();
+      // the focus will be set to the input element allowing the user to type immediately as soon as edit button is clicked
+    }
+    function updateTask(task_id) {
+      const task = document.getElementById(`task-${task_id}`).value;
+      fetch(`${apiUrl}/tasks/${task_id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ task })
+      })
+        .then(response => response.json())
+        .then(data => {
+          loadTasks();
+        });
+    }
+
+    function deleteTask(task_id) {
+      fetch(`${apiUrl}/tasks/${task_id}`, {
+        method: 'DELETE'
+      })
+        .then(response => response.json())
+        .then(data => {
+          
+          loadTasks();
+        });
+    }
+    function completeTask(task_id) {
+        fetch(`${apiUrl}/tasks/${task_id}/complete`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' }
+        })
+          .then(response => response.json())
+          .then(data => {
+             // Reload the tasks to reflect the changes
+            loadTasks();
+
+          });
+      }
+  </script>
+</body>
+</html>
